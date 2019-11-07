@@ -221,6 +221,8 @@ object Magnolia {
                            typeOf[Boolean],
                            typeOf[Unit])
 
+      val isPrivate = classType.exists(_.isPrivate)
+
       val isValueClass = genericType <:< typeOf[AnyVal] && !primitives.exists(_ =:= genericType)
 
       val resultType = appliedType(typeConstructor, genericType)
@@ -241,6 +243,7 @@ object Magnolia {
           ${c.prefix}.combine(new $magnoliaPkg.CaseClass[$typeConstructor, $genericType](
             $typeName,
             true,
+            $isPrivate,
             false,
             new $scalaPkg.Array(0),
             $scalaPkg.Array(..$classAnnotationTrees)
@@ -379,6 +382,7 @@ object Magnolia {
             ${c.prefix}.combine(new $magnoliaPkg.CaseClass[$typeConstructor, $genericType](
               $typeName,
               false,
+              $isPrivate,
               $isValueClass,
               $paramsVal,
               $scalaPkg.Array(..$classAnnotationTrees)

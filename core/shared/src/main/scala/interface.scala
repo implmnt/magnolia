@@ -143,6 +143,7 @@ trait Param[Typeclass[_], Type] extends Serializable {
 abstract class CaseClass[Typeclass[_], Type] (
   val typeName: TypeName,
   val isObject: Boolean,
+  val isPrivate: Boolean,
   val isValueClass: Boolean,
   parametersArray: Array[Param[Typeclass, Type]],
   annotationsArray: Array[Any]
